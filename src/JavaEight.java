@@ -7,6 +7,8 @@ class JavaEight
     System.out.println(myFunctionImpl.addNumbers(2, 5));
     
     //If it's one line, doesn't have to add return
+    //Because of functional interface, we can get rid of parameter types
+    //If its a one argument in lambda, parenthesis not needed
     MyFunction myFunction = (int a, int b) -> "Value from lambda: " + (a + b);
     //By calling Lambda function
     System.out.println(myFunction.addNumbers(2, 5));
