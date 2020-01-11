@@ -3,6 +3,8 @@ package exercises;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class ExerciseOneJava7
 {
@@ -21,25 +23,44 @@ public class ExerciseOneJava7
         return o1.getLastName().compareTo(o2.getLastName());
       }
     });
+    
     //With Lambda
     people.sort((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()));
     
+    
+    
+    
+    
     // Step 2
     printAll(people);
+    
     //With Lambda
-    printLastNameConditionally(people, p -> true);
+    printLastNameConditionally(people, p -> true, p -> System.out.println(p));
+    
+    
+    
+    
+    
     
     // Step 3
-    printLastNameConditionally(people, new Condition()
+    printLastNameConditionally(people, new Predicate<Person>()
     {
       @Override
       public boolean test(Person p)
       {
         return p.getLastName().startsWith("C");
       }
+    }, new Consumer<Person>()
+    {
+      @Override
+      public void accept(Person person)
+      {
+        System.out.println(person);
+      }
     });
+    
     //With Lambda
-    printLastNameConditionally(people, p -> p.getLastName().startsWith("C"));
+    printLastNameConditionally(people, p -> p.getLastName().startsWith("C"), p -> System.out.println(p));
   }
   
   private static void printAll(List<Person> people)
@@ -51,14 +72,15 @@ public class ExerciseOneJava7
     }
   }
   
-  private static void printLastNameConditionally(List<Person> people, Condition condition)
+  private static void printLastNameConditionally(List<Person> people, Predicate<Person> condition,
+                                                 Consumer<Person> consumer)
   {
     System.out.println("Printing all persons conditionally");
     for (Person p : people)
     {
       if (condition.test(p))
       {
-        System.out.println(p);
+        consumer.accept(p);
       }
     }
   }
