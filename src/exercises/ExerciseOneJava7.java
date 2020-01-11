@@ -37,6 +37,9 @@ public class ExerciseOneJava7
     //With Lambda
     printLastNameConditionally(people, p -> true, p -> System.out.println(p));
     
+    //With method reference
+    printLastNameConditionally(people, p -> true, System.out::println);
+    
     
     
     
